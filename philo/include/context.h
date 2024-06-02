@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/01 18:19:12 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/01 23:18:02 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <unistd.h>
+
+# define PHILOSOPHERS 200
 
 typedef struct s_ctx	t_ctx;
 typedef struct s_time	t_time;
@@ -37,6 +39,7 @@ struct s_philo
 	int			id;
 	int			eating;
 	int			meals_eaten;
+	size_t		start;
 	size_t		last_meal;
 	t_mtx		r_fork;
 	t_mtx		*l_fork;
@@ -45,8 +48,8 @@ struct s_philo
 
 struct	s_ctx
 {
-	t_philo	philo[200];
-	int		dead_flag;
+	t_philo	*philo;
+	int	dead_flag;
 	size_t	time_to_die;
 	size_t	time_to_eat;
 	size_t	time_to_sleep;
