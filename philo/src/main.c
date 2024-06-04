@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/01 23:26:56 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/03 22:05:59 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	parse_inputs(t_ctx *ctx, char **argv)
 	if (ctx->num_of_philos < 0 || ctx->num_of_philos> 200)
 		return (false);
 	ctx->time_to_die = ft_atol(argv[2]);
-	if (ctx->time_to_die < 1e2)
+	if (ctx->time_to_die < 10)
 		return (false);
 	ctx->time_to_eat = ft_atol(argv[3]);
-	if (ctx->time_to_eat < 1e2)
+	if (ctx->time_to_eat < 10)
 		return (false);
 	ctx->time_to_sleep = ft_atol(argv[4]);
-	if (ctx->time_to_sleep < 1e2)
+	if (ctx->time_to_sleep < 10)
 		return (false);
 	if (argv[5])
 	{
@@ -59,43 +59,36 @@ int	parse_inputs(t_ctx *ctx, char **argv)
 	return (true);
 }
 
-size_t	current_time(t_time *time, t_philo *philo)
+size_t	current_time(void)
 {
 	struct timeval			timestamp;
 
 	if (gettimeofday(&timestamp, NULL) < 0)
 		ft_putendl_fd("philo: error: gettimeofday()", STDERR_FILENO);
-	if (!time)
-		return (timestamp.tv_sec * 1000 + timestamp.tv_usec / 1000);
-	timestamp.tv_sec -= philo->start;
-	time->hour = timestamp.tv_sec / 3600 % 24;
-	time->min = timestamp.tv_sec / 60 % 60;
-	time->sec = timestamp.tv_sec % 60;
-	time->milli = timestamp.tv_usec / 1000;
-	return (timestamp.tv_sec);
+	return (timestamp.tv_sec * 1000 + timestamp.tv_usec / 1000);
 }
 
 void	print_log(t_philo *philo, char *message)
 {
-	t_time	time;
+	size_t	time;
 
-	time = (t_time){0};
-	current_time(&time, philo);
+	time = current_time() - philo->start;
 	pthread_mutex_lock(&philo->ctx->write_lock);
+	pthread_mutex_lock(&philo->ctx->dead_lock);
 	if (!philo->ctx->dead_flag)
 		printf("%02ld:%02ld:%02ld.%03ld%5d  %s\n",
-			time.hour,
-			time.min,
-			time.sec,
-			time.milli,
+			time / 1000 / 3600 % 24,
+			time / 1000 / 60 % 60,
+			time / 1000 % 60,
+			time % 1000, 
 			philo->id,
 			message);
+	pthread_mutex_unlock(&philo->ctx->dead_lock);
 	pthread_mutex_unlock(&philo->ctx->write_lock);
 }
 
 void	init_philos(t_ctx *ctx)
 {
-	struct timeval			timestamp;
 	int	i;
 
 	i = 0;
@@ -105,18 +98,13 @@ void	init_philos(t_ctx *ctx)
 		ctx->philo[i].eating = 0;
 		ctx->philo[i].meals_eaten = 0;
 		pthread_mutex_init(&ctx->philo[i].r_fork, NULL);
-		if (i == 0)
-			ctx->philo[i].l_fork = &ctx->philo[ctx->num_of_philos - 1].r_fork;
-		else if (i == ctx->num_of_philos - 1)
+		if (i == ctx->num_of_philos - 1)
 			ctx->philo[i].l_fork = &ctx->philo[0].r_fork;
 		else
 		 	ctx->philo[i].l_fork = &ctx->philo[i + 1].r_fork;
 		ctx->philo[i].ctx = ctx;
-
-		if (gettimeofday(&timestamp, NULL) < 0)
-			ft_putendl_fd("philo: error: gettimeofday()", STDERR_FILENO);
-		ctx->philo[i].start = timestamp.tv_sec;
-		ctx->philo[i].last_meal = current_time(NULL, NULL);
+		ctx->philo[i].start = current_time();
+		ctx->philo[i].last_meal = current_time();
 		i++;
 	}
 	ctx->dead_flag = 0;
@@ -141,7 +129,7 @@ void destroy_all(t_ctx *ctx, char *message)
 int	philosopher_dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->ctx->meal_lock);
-	if (current_time(NULL, NULL) - philo->last_meal >= philo->ctx->time_to_die
+	if (current_time() - philo->last_meal >= philo->ctx->time_to_die
 			&& philo->eating == 0)
 	{
 		pthread_mutex_unlock(&philo->ctx->meal_lock);
@@ -160,7 +148,7 @@ int	check_if_dead(t_philo *philos)
 	{
 		if (philosopher_dead(&philos[i]))
 		{
-			print_log(&philos[i], "died");
+			print_log(&philos[i], DIED);
 			pthread_mutex_lock(&philos[0].ctx->dead_lock);
 			philos[0].ctx->dead_flag = true;
 			pthread_mutex_unlock(&philos[0].ctx->dead_lock);
@@ -186,8 +174,8 @@ int	check_if_ate(t_philo *philos)
 		if (philos[i].meals_eaten >= philos[i].ctx->num_times_to_eat)
 			meals++;
 		pthread_mutex_unlock(&philos[i].ctx->meal_lock);
+		i++;
 	}
-	// TODO: Change it to be more fast
 	if (meals == philos[0].ctx->num_of_philos)
 	{
 		pthread_mutex_lock(&philos[0].ctx->dead_lock);
@@ -203,9 +191,8 @@ void	*monitor(void *p)
 	t_philo	*philos;
 
 	philos = (t_philo *) p;
-	while (1)
-		if (check_if_dead(philos) == 1 || check_if_ate(philos) == 1)
-			break ;
+	while (!check_if_dead(philos) && !check_if_ate(philos))
+		continue ;
 	return (philos);
 }
 
@@ -215,45 +202,52 @@ int	ft_usleep(size_t milliseconds)
 {
 	size_t	start;
 
-	start = current_time(NULL, NULL);
-	while ((current_time(NULL, NULL) - start) < milliseconds)
+	start = current_time();
+	if (milliseconds >= start)
+		return (false);
+	while ((current_time() - start) < milliseconds)
 		usleep(500);
-	return (0);
+	return (false);
 }
 
-void	think(t_philo *philo)
-{
-	print_log(philo, "is thinking");
-}
-
-// Dream routine funtion
-
-void	dream(t_philo *philo)
-{
-	print_log(philo, "is sleeping");
-	ft_usleep(philo->ctx->time_to_sleep);
-}
-
-// Eat routine funtion
-
-void	eat(t_philo *philo)
+void	even(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->r_fork);
-	print_log(philo, "has taken a fork");
-	if (philo->ctx->num_of_philos == 1)
-	{
-		ft_usleep(philo->ctx->time_to_die);
-		pthread_mutex_unlock(&philo->r_fork);
-		return ;
-	}
+	print_log(philo, RFORK);
 	pthread_mutex_lock(philo->l_fork);
-	print_log(philo, "has taken a fork");
+	print_log(philo, LFORK);
 	philo->eating = 1;
-	print_log(philo, "is eating");
-	pthread_mutex_lock(&philo->ctx->meal_lock);
-	philo->last_meal = current_time(NULL, NULL);
-	philo->meals_eaten++;
+	print_log(philo, EAT);
 	ft_usleep(philo->ctx->time_to_eat);
+	pthread_mutex_lock(&philo->ctx->meal_lock);
+	philo->last_meal = current_time();
+	philo->meals_eaten++;
+	pthread_mutex_unlock(&philo->ctx->meal_lock);
+	philo->eating = 0;
+	pthread_mutex_unlock(philo->l_fork);
+	pthread_mutex_unlock(&philo->r_fork);
+	print_log(philo, SLEEP);
+	ft_usleep(philo->ctx->time_to_sleep);
+	print_log(philo, THINK);
+	ft_usleep(philo->ctx->time_to_die - philo->ctx->time_to_eat - philo->ctx->time_to_sleep);
+}
+
+void	odd(t_philo *philo)
+{
+	print_log(philo, SLEEP);
+	ft_usleep(philo->ctx->time_to_sleep);
+	print_log(philo, THINK);
+	ft_usleep(philo->ctx->time_to_die - philo->ctx->time_to_eat - philo->ctx->time_to_sleep);
+	pthread_mutex_lock(philo->l_fork);
+	print_log(philo, LFORK);
+	pthread_mutex_lock(&philo->r_fork);
+	print_log(philo, RFORK);
+	philo->eating = 1;
+	print_log(philo, EAT);
+	ft_usleep(philo->ctx->time_to_eat);
+	pthread_mutex_lock(&philo->ctx->meal_lock);
+	philo->last_meal = current_time();
+	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->ctx->meal_lock);
 	philo->eating = 0;
 	pthread_mutex_unlock(philo->l_fork);
@@ -263,7 +257,7 @@ void	eat(t_philo *philo)
 int	dead_loop(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->ctx->dead_lock);
-	if (philo->ctx->dead_flag == true)
+	if (philo->ctx->dead_flag == 1)
 	{
 		pthread_mutex_unlock(&philo->ctx->dead_lock);
 		return (true);
@@ -277,19 +271,24 @@ void	*routine(void *pointer)
 	t_philo	*philo;
 
 	philo = (t_philo *)pointer;
-	if (philo->id % 2 == 0)
-		ft_usleep(1);
-	while (!dead_loop(philo))
+	if (philo->ctx->num_of_philos == 1)
 	{
-		eat(philo);
-		dream(philo);
-		think(philo);
+		pthread_mutex_lock(&philo->r_fork);
+		print_log(philo, RFORK);
+		ft_usleep(philo->ctx->time_to_die);
+		pthread_mutex_unlock(&philo->r_fork);
+		return (philo);
 	}
+	if (philo->id % 2 == 0)
+		while (!dead_loop(philo))
+			even(philo);
+	else
+		while (!dead_loop(philo))
+			odd(philo);
 	return (pointer);
 }
 
 ///
-
 
 void	create_threads(t_ctx *ctx)
 {
@@ -309,8 +308,10 @@ void	create_threads(t_ctx *ctx)
 		destroy_all(ctx, "philo: Failed to join observer");
 	i = 0;
 	while (i < ctx->num_of_philos)
+	{
 		if (pthread_join(ctx->philo[i++].thread, NULL) != 0)
 			destroy_all(ctx, "philo: Failed to join philo");
+	}
 }
 
 int	main(int argc, char **argv)
@@ -326,7 +327,6 @@ int	main(int argc, char **argv)
 		printf("Bad format input!\n");
 		return (EXIT_FAILURE);
 	}
-	ctx.time = (t_time){0};
 	ctx.philo = philo;
 	init_philos(&ctx);
 	create_threads(&ctx);

@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/01 23:18:02 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/03 21:51:13 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,26 @@
 
 # define PHILOSOPHERS 200
 
+# define RED "\033[0;91m"
+# define GREEN "\033[0;92m"
+# define YELLOW "\033[0;93m"
+# define BLUE "\033[0;94m"
+# define MAGENTA "\033[0;95m"
+# define CYAN "\033[0;96m"
+# define WHITE "\033[0;97m"
+# define RESET "\033[0m"
+
+
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define RFORK "has taken a fork"
+# define LFORK "has taken a fork"
+# define DIED "\033[0;91mdied\033[0m"
+
 typedef struct s_ctx	t_ctx;
-typedef struct s_time	t_time;
 typedef struct s_philo	t_philo;
 typedef pthread_mutex_t	t_mtx;
-
-struct s_time
-{
-	long	hour;
-	long	min;
-	long	sec;
-	long	milli;
-};
 
 struct s_philo
 {
@@ -55,7 +63,6 @@ struct	s_ctx
 	size_t	time_to_sleep;
 	int		num_of_philos;
 	int		num_times_to_eat;
-	t_time	time;
 	t_mtx	dead_lock;
 	t_mtx	meal_lock;
 	t_mtx	write_lock;
