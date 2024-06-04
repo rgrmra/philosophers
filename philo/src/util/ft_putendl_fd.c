@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 18:12:04 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/05/28 18:21:14 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/01 21:05:36 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ void	ft_putendl_fd(char *s, int fd)
 {
 	char	*p;
 
+	if (!s || !*s)
+		return ;
 	p = s;
 	while (*p)
 		p++;
+	*(p + (p - s)) = '\n';
 	write(fd, s, p - s);
-	write(fd, "\n", 1);
 }

@@ -6,7 +6,7 @@
 #    By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/23 19:48:08 by rde-mour          #+#    #+#              #
-#    Updated: 2024/05/28 18:54:21 by rde-mour         ###   ########.org.br    #
+#    Updated: 2024/06/03 21:50:49 by rde-mour         ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,10 @@ OBJDIR				= ./obj
 SRCS				= $(FILES:%.c=$(SRCDIR)/%.c)
 OBJS				= $(FILES:%.c=$(OBJDIR)/%.o)
 
-INCLUDES			= -I ./include
+INCLUDES			:= -I ./include
 
 COMPILER			= cc
-CFLAGS				= -Wall -Wextra -Werror
+CFLAGS				= -Wall -Wextra -Werror -pthread -O3 -g3
 
 all: 				$(NAME)
 
@@ -41,7 +41,7 @@ $(NAME): 			$(LIBS) $(OBJS)
 					@echo "$(BLUE)Compiled $(NAME) successfully$(RESET)"
 
 $(OBJDIR)/%.o: 	$(SRCDIR)/%.c
-					@mkdir -p $(@D)
+					@mkdir -p $(dir $@)
 					@$(COMPILER) $(CFLAGS) -c $< $(INCLUDES) -o $@
 					@echo "$(GREEN)Compiled$(RESET) $(notdir $<)"
 
