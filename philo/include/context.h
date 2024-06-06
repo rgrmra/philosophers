@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/03 21:51:13 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/05 20:31:03 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ typedef pthread_mutex_t	t_mtx;
 struct s_philo
 {
 	pthread_t	thread;
-	int			id;
-	int			eating;
-	int			meals_eaten;
+	short		id;
 	size_t		start;
 	size_t		last_meal;
 	t_mtx		r_fork;
@@ -57,14 +55,15 @@ struct s_philo
 struct	s_ctx
 {
 	t_philo	*philo;
-	int	dead_flag;
-	size_t	time_to_die;
-	size_t	time_to_eat;
-	size_t	time_to_sleep;
-	int		num_of_philos;
-	int		num_times_to_eat;
-	t_mtx	dead_lock;
+	_Bool	dead;
+	size_t	die_time;
+	size_t	eat_time;
+	size_t	sleep_time;
+	size_t	think_time;
+	int		philos;
+	int		meals;
 	t_mtx	meal_lock;
+	t_mtx	dead_lock;
 	t_mtx	write_lock;
 };
 

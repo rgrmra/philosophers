@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 18:03:55 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/05/30 15:20:51 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/05 20:37:29 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ long	ft_atol(const char *nptr)
 	if (sign == '-')
 		nb = -nb;
 	if (*nptr)
-		return (-1);
+		return (0);
 	return (nb);
 }
