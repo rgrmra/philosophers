@@ -1,0 +1,488 @@
+00:00:00.003    7  has taken a fork
+00:00:00.003    7  has taken a fork
+00:00:00.003    7  is eating
+00:00:00.003    9  has taken a fork
+00:00:00.003    9  has taken a fork
+00:00:00.003    9  is eating
+00:00:00.003    6  has taken a fork
+00:00:00.003   11  has taken a fork
+00:00:00.003   11  has taken a fork
+00:00:00.003   11  is eating
+00:00:00.003   13  has taken a fork
+00:00:00.003   13  has taken a fork
+00:00:00.003   13  is eating
+00:00:00.003   15  has taken a fork
+00:00:00.003   15  has taken a fork
+00:00:00.003   15  is eating
+00:00:00.003   17  has taken a fork
+00:00:00.003   17  has taken a fork
+00:00:00.003   17  is eating
+00:00:00.003   19  has taken a fork
+00:00:00.003   19  has taken a fork
+00:00:00.003   19  is eating
+00:00:00.003    4  has taken a fork
+00:00:00.003    4  has taken a fork
+00:00:00.003    4  is eating
+00:00:00.003   21  has taken a fork
+00:00:00.003   21  has taken a fork
+00:00:00.003   21  is eating
+00:00:00.003   23  has taken a fork
+00:00:00.003   23  has taken a fork
+00:00:00.003   23  is eating
+00:00:00.003   25  has taken a fork
+00:00:00.003   25  has taken a fork
+00:00:00.003   25  is eating
+00:00:00.003   27  has taken a fork
+00:00:00.003   27  has taken a fork
+00:00:00.003   27  is eating
+00:00:00.003   29  has taken a fork
+00:00:00.003   29  has taken a fork
+00:00:00.003   29  is eating
+00:00:00.003   31  has taken a fork
+00:00:00.003   31  has taken a fork
+00:00:00.003   31  is eating
+00:00:00.003   33  has taken a fork
+00:00:00.003   33  has taken a fork
+00:00:00.003   33  is eating
+00:00:00.003   35  has taken a fork
+00:00:00.003   35  has taken a fork
+00:00:00.003   35  is eating
+00:00:00.003   37  has taken a fork
+00:00:00.003   37  has taken a fork
+00:00:00.003   37  is eating
+00:00:00.003   39  has taken a fork
+00:00:00.003   39  has taken a fork
+00:00:00.003   39  is eating
+00:00:00.003   41  has taken a fork
+00:00:00.003   41  has taken a fork
+00:00:00.003   41  is eating
+00:00:00.003   43  has taken a fork
+00:00:00.003   43  has taken a fork
+00:00:00.003   43  is eating
+00:00:00.003   45  has taken a fork
+00:00:00.003   45  has taken a fork
+00:00:00.003   45  is eating
+00:00:00.003   47  has taken a fork
+00:00:00.003   47  has taken a fork
+00:00:00.003   47  is eating
+00:00:00.004   49  has taken a fork
+00:00:00.004   49  has taken a fork
+00:00:00.004   49  is eating
+00:00:00.004   51  has taken a fork
+00:00:00.004   51  has taken a fork
+00:00:00.004   51  is eating
+00:00:00.004   53  has taken a fork
+00:00:00.004   53  has taken a fork
+00:00:00.004   53  is eating
+00:00:00.004   55  has taken a fork
+00:00:00.004   55  has taken a fork
+00:00:00.004   55  is eating
+00:00:00.004   57  has taken a fork
+00:00:00.004   57  has taken a fork
+00:00:00.004   57  is eating
+00:00:00.005   59  has taken a fork
+00:00:00.005   59  has taken a fork
+00:00:00.005   59  is eating
+00:00:00.006   61  has taken a fork
+00:00:00.006   61  has taken a fork
+00:00:00.006   61  is eating
+00:00:00.008   63  has taken a fork
+00:00:00.008   63  has taken a fork
+00:00:00.008   63  is eating
+00:00:00.010   65  has taken a fork
+00:00:00.010   65  has taken a fork
+00:00:00.010   65  is eating
+00:00:00.012   67  has taken a fork
+00:00:00.012   67  has taken a fork
+00:00:00.012   67  is eating
+00:00:00.014   69  has taken a fork
+00:00:00.014   69  has taken a fork
+00:00:00.014   69  is eating
+00:00:00.014    2  has taken a fork
+00:00:00.014    2  has taken a fork
+00:00:00.014    2  is eating
+00:00:00.016   71  has taken a fork
+00:00:00.016   71  has taken a fork
+00:00:00.016   71  is eating
+00:00:00.018   73  has taken a fork
+00:00:00.018   73  has taken a fork
+00:00:00.018   73  is eating
+00:00:00.023   75  has taken a fork
+00:00:00.023   75  has taken a fork
+00:00:00.023   75  is eating
+00:00:00.025   77  has taken a fork
+00:00:00.025   77  has taken a fork
+00:00:00.025   77  is eating
+00:00:00.028   79  has taken a fork
+00:00:00.028   79  has taken a fork
+00:00:00.028   79  is eating
+00:00:00.031   81  has taken a fork
+00:00:00.031   81  has taken a fork
+00:00:00.031   81  is eating
+00:00:00.036   83  has taken a fork
+00:00:00.036   83  has taken a fork
+00:00:00.036   83  is eating
+00:00:00.039   85  has taken a fork
+00:00:00.039   85  has taken a fork
+00:00:00.039   85  is eating
+00:00:00.042   87  has taken a fork
+00:00:00.042   87  has taken a fork
+00:00:00.042   87  is eating
+00:00:00.044   89  has taken a fork
+00:00:00.045   89  has taken a fork
+00:00:00.045   89  is eating
+00:00:00.048   91  has taken a fork
+00:00:00.048   91  has taken a fork
+00:00:00.048   91  is eating
+00:00:00.051   93  has taken a fork
+00:00:00.051   93  has taken a fork
+00:00:00.051   93  is eating
+00:00:00.054   95  has taken a fork
+00:00:00.054   95  has taken a fork
+00:00:00.054   95  is eating
+00:00:00.058   97  has taken a fork
+00:00:00.058   97  has taken a fork
+00:00:00.058   97  is eating
+00:00:00.103   99  has taken a fork
+00:00:00.103   99  has taken a fork
+00:00:00.103   99  is eating
+00:00:00.103  101  has taken a fork
+00:00:00.103  101  has taken a fork
+00:00:00.103  101  is eating
+00:00:00.103  103  has taken a fork
+00:00:00.103  103  has taken a fork
+00:00:00.103  103  is eating
+00:00:00.103  105  has taken a fork
+00:00:00.103  105  has taken a fork
+00:00:00.103  105  is eating
+00:00:00.103  107  has taken a fork
+00:00:00.103  107  has taken a fork
+00:00:00.103  107  is eating
+00:00:00.103  109  has taken a fork
+00:00:00.103  109  has taken a fork
+00:00:00.103  109  is eating
+00:00:00.103  111  has taken a fork
+00:00:00.103  111  has taken a fork
+00:00:00.103  111  is eating
+00:00:00.129  113  has taken a fork
+00:00:00.129  113  has taken a fork
+00:00:00.129  113  is eating
+00:00:00.129  115  has taken a fork
+00:00:00.129  115  has taken a fork
+00:00:00.129  115  is eating
+00:00:00.129  117  has taken a fork
+00:00:00.129  117  has taken a fork
+00:00:00.129  117  is eating
+00:00:00.129  119  has taken a fork
+00:00:00.129  119  has taken a fork
+00:00:00.129  119  is eating
+00:00:00.129  121  has taken a fork
+00:00:00.129  121  has taken a fork
+00:00:00.129  121  is eating
+00:00:00.129  123  has taken a fork
+00:00:00.129  123  has taken a fork
+00:00:00.129  123  is eating
+00:00:00.129  125  has taken a fork
+00:00:00.129  125  has taken a fork
+00:00:00.129  125  is eating
+00:00:00.129  127  has taken a fork
+00:00:00.129  127  has taken a fork
+00:00:00.129  127  is eating
+00:00:00.129  129  has taken a fork
+00:00:00.129  129  has taken a fork
+00:00:00.129  129  is eating
+00:00:00.129  131  has taken a fork
+00:00:00.129  131  has taken a fork
+00:00:00.129  131  is eating
+00:00:00.131  133  has taken a fork
+00:00:00.131  133  has taken a fork
+00:00:00.131  133  is eating
+00:00:00.135  135  has taken a fork
+00:00:00.135  135  has taken a fork
+00:00:00.135  135  is eating
+00:00:00.140  137  has taken a fork
+00:00:00.140  137  has taken a fork
+00:00:00.140  137  is eating
+00:00:00.144  139  has taken a fork
+00:00:00.144  139  has taken a fork
+00:00:00.144  139  is eating
+00:00:00.148  141  has taken a fork
+00:00:00.148  141  has taken a fork
+00:00:00.148  141  is eating
+00:00:00.203   24  has taken a fork
+00:00:00.203   23  is sleeping
+00:00:00.203    3  has taken a fork
+00:00:00.203    4  is sleeping
+00:00:00.203   22  has taken a fork
+00:00:00.203   22  has taken a fork
+00:00:00.203   22  is eating
+00:00:00.203   21  is sleeping
+00:00:00.203   48  has taken a fork
+00:00:00.203   47  is sleeping
+00:00:00.203   24  has taken a fork
+00:00:00.203   24  is eating
+00:00:00.203   26  has taken a fork
+00:00:00.203   25  is sleeping
+00:00:00.203   36  has taken a fork
+00:00:00.203   35  is sleeping
+00:00:00.203    6  has taken a fork
+00:00:00.203    6  is eating
+00:00:00.203    8  has taken a fork
+00:00:00.203    7  is sleeping
+00:00:00.203    8  has taken a fork
+00:00:00.203    8  is eating
+00:00:00.203   10  has taken a fork
+00:00:00.203    9  is sleeping
+00:00:00.203   10  has taken a fork
+00:00:00.203   10  is eating
+00:00:00.203   12  has taken a fork
+00:00:00.203   11  is sleeping
+00:00:00.203   44  has taken a fork
+00:00:00.203   43  is sleeping
+00:00:00.203   30  has taken a fork
+00:00:00.203   29  is sleeping
+00:00:00.203   40  has taken a fork
+00:00:00.203   39  is sleeping
+00:00:00.203   40  has taken a fork
+00:00:00.203   40  is eating
+00:00:00.203   42  has taken a fork
+00:00:00.203   42  has taken a fork
+00:00:00.203   42  is eating
+00:00:00.203   41  is sleeping
+00:00:00.203   12  has taken a fork
+00:00:00.203   12  is eating
+00:00:00.203   14  has taken a fork
+00:00:00.203   13  is sleeping
+00:00:00.203   36  has taken a fork
+00:00:00.203   36  is eating
+00:00:00.203   38  has taken a fork
+00:00:00.203   38  has taken a fork
+00:00:00.203   38  is eating
+00:00:00.203   37  is sleeping
+00:00:00.204   20  has taken a fork
+00:00:00.204   20  has taken a fork
+00:00:00.204   20  is eating
+00:00:00.204   19  is sleeping
+00:00:00.204   54  has taken a fork
+00:00:00.204   53  is sleeping
+00:00:00.204   26  has taken a fork
+00:00:00.204   26  is eating
+00:00:00.204   28  has taken a fork
+00:00:00.204   28  has taken a fork
+00:00:00.204   28  is eating
+00:00:00.204   27  is sleeping
+00:00:00.204   58  has taken a fork
+00:00:00.204   57  is sleeping
+00:00:00.204   44  has taken a fork
+00:00:00.204   44  is eating
+00:00:00.205   46  has taken a fork
+00:00:00.205   46  has taken a fork
+00:00:00.205   46  is eating
+00:00:00.205   45  is sleeping
+00:00:00.205   14  has taken a fork
+00:00:00.205   14  is eating
+00:00:00.205   16  has taken a fork
+00:00:00.205   15  is sleeping
+00:00:00.206   62  has taken a fork
+00:00:00.206   61  is sleeping
+00:00:00.206   30  has taken a fork
+00:00:00.206   30  is eating
+00:00:00.206   32  has taken a fork
+00:00:00.206   31  is sleeping
+00:00:00.206   32  has taken a fork
+00:00:00.206   32  is eating
+00:00:00.206   34  has taken a fork
+00:00:00.206   34  has taken a fork
+00:00:00.206   34  is eating
+00:00:00.206   33  is sleeping
+00:00:00.208   62  has taken a fork
+00:00:00.208   62  is eating
+00:00:00.208   64  has taken a fork
+00:00:00.208   63  is sleeping
+00:00:00.209   54  has taken a fork
+00:00:00.209   54  is eating
+00:00:00.251   52  has taken a fork
+00:00:00.251   52  has taken a fork
+00:00:00.251   52  is eating
+00:00:00.256   94  has taken a fork
+00:00:00.256   93  is sleeping
+00:00:00.257   80  has taken a fork
+00:00:00.257   79  is sleeping
+00:00:00.258   92  has taken a fork
+00:00:00.258   92  has taken a fork
+00:00:00.258   92  is eating
+00:00:00.260   58  has taken a fork
+00:00:00.260   58  is eating
+00:00:00.265   72  has taken a fork
+00:00:00.265   71  is sleeping
+00:00:00.266   64  has taken a fork
+00:00:00.266   64  is eating
+00:00:00.266   66  has taken a fork
+00:00:00.266   65  is sleeping
+00:00:00.268   86  has taken a fork
+00:00:00.268   85  is sleeping
+00:00:00.268   98  has taken a fork
+00:00:00.268   97  is sleeping
+00:00:00.268  144  has taken a fork
+00:00:00.268  144  has taken a fork
+00:00:00.268  144  is eating
+00:00:00.269  145  has taken a fork
+00:00:00.269  147  has taken a fork
+00:00:00.269  147  has taken a fork
+00:00:00.269  147  is eating
+00:00:00.269  149  has taken a fork
+00:00:00.269  149  has taken a fork
+00:00:00.269  149  is eating
+00:00:00.270  151  has taken a fork
+00:00:00.270  151  has taken a fork
+00:00:00.270  151  is eating
+00:00:00.270  153  has taken a fork
+00:00:00.270  153  has taken a fork
+00:00:00.270  153  is eating
+00:00:00.270  155  has taken a fork
+00:00:00.270  155  has taken a fork
+00:00:00.270  155  is eating
+00:00:00.271  158  has taken a fork
+00:00:00.271  158  has taken a fork
+00:00:00.271  158  is eating
+00:00:00.271  159  has taken a fork
+00:00:00.271  161  has taken a fork
+00:00:00.271  161  has taken a fork
+00:00:00.271  161  is eating
+00:00:00.272  163  has taken a fork
+00:00:00.272  163  has taken a fork
+00:00:00.272  163  is eating
+00:00:00.272   66  has taken a fork
+00:00:00.272   66  is eating
+00:00:00.272   68  has taken a fork
+00:00:00.272   67  is sleeping
+00:00:00.275   72  has taken a fork
+00:00:00.275   72  is eating
+00:00:00.275   74  has taken a fork
+00:00:00.275   73  is sleeping
+00:00:00.277   78  has taken a fork
+00:00:00.277   78  has taken a fork
+00:00:00.277   78  is eating
+00:00:00.277   77  is sleeping
+00:00:00.279   84  has taken a fork
+00:00:00.279   84  has taken a fork
+00:00:00.279   84  is eating
+00:00:00.279   83  is sleeping
+00:00:00.282   94  has taken a fork
+00:00:00.282   94  is eating
+00:00:00.282   96  has taken a fork
+00:00:00.282   96  has taken a fork
+00:00:00.282   96  is eating
+00:00:00.282   95  is sleeping
+00:00:00.287   80  has taken a fork
+00:00:00.287   80  is eating
+00:00:00.287   82  has taken a fork
+00:00:00.287   82  has taken a fork
+00:00:00.287   82  is eating
+00:00:00.287   81  is sleeping
+00:00:00.290   68  has taken a fork
+00:00:00.290   68  is eating
+00:00:00.290   70  has taken a fork
+00:00:00.290   70  has taken a fork
+00:00:00.290   70  is eating
+00:00:00.290   69  is sleeping
+00:00:00.293   74  has taken a fork
+00:00:00.293   74  is eating
+00:00:00.293   76  has taken a fork
+00:00:00.293   76  has taken a fork
+00:00:00.293   76  is eating
+00:00:00.293   75  is sleeping
+00:00:00.295   90  has taken a fork
+00:00:00.295   90  has taken a fork
+00:00:00.295   90  is eating
+00:00:00.295   89  is sleeping
+00:00:00.304  108  has taken a fork
+00:00:00.304   51  is sleeping
+00:00:00.305  112  has taken a fork
+00:00:00.306   91  is sleeping
+00:00:00.306   60  has taken a fork
+00:00:00.306   60  has taken a fork
+00:00:00.306   60  is eating
+00:00:00.306   59  is sleeping
+00:00:00.307  165  has taken a fork
+00:00:00.307  165  has taken a fork
+00:00:00.307  165  is eating
+00:00:00.307  102  has taken a fork
+00:00:00.307  108  has taken a fork
+00:00:00.307  108  is eating
+00:00:00.310  102  has taken a fork
+00:00:00.310  102  is eating
+00:00:00.310  104  has taken a fork
+00:00:00.311   98  has taken a fork
+00:00:00.311   98  is eating
+00:00:00.311  100  has taken a fork
+00:00:00.311  100  has taken a fork
+00:00:00.311  100  is eating
+00:00:00.318  107  is sleeping
+00:00:00.320  111  is sleeping
+00:00:00.324  101  is sleeping
+00:00:00.325  110  has taken a fork
+00:00:00.325  110  has taken a fork
+00:00:00.325  110  is eating
+00:00:00.325  109  is sleeping
+00:00:00.329  120  has taken a fork
+00:00:00.329  119  is sleeping
+00:00:00.330  120  has taken a fork
+00:00:00.330  120  is eating
+00:00:00.330  122  has taken a fork
+00:00:00.330  121  is sleeping
+00:00:00.331  122  has taken a fork
+00:00:00.331  122  is eating
+00:00:00.331  124  has taken a fork
+00:00:00.331  123  is sleeping
+00:00:00.335  116  has taken a fork
+00:00:00.335  115  is sleeping
+00:00:00.336   99  is sleeping
+00:00:00.337  124  has taken a fork
+00:00:00.337  124  is eating
+00:00:00.337  126  has taken a fork
+00:00:00.337  125  is sleeping
+00:00:00.337  130  has taken a fork
+00:00:00.337  129  is sleeping
+00:00:00.339  116  has taken a fork
+00:00:00.339  116  is eating
+00:00:00.339  118  has taken a fork
+00:00:00.339  118  has taken a fork
+00:00:00.339  118  is eating
+00:00:00.339  117  is sleeping
+00:00:00.345  112  has taken a fork
+00:00:00.345  112  is eating
+00:00:00.345  114  has taken a fork
+00:00:00.345  114  has taken a fork
+00:00:00.345  114  is eating
+00:00:00.345  113  is sleeping
+00:00:00.348  167  has taken a fork
+00:00:00.348  167  has taken a fork
+00:00:00.348  167  is eating
+00:00:00.349  130  has taken a fork
+00:00:00.349  130  is eating
+00:00:00.349  132  has taken a fork
+00:00:00.349  131  is sleeping
+00:00:00.350  126  has taken a fork
+00:00:00.350  126  is eating
+00:00:00.350  128  has taken a fork
+00:00:00.350  128  has taken a fork
+00:00:00.350  128  is eating
+00:00:00.350  127  is sleeping
+00:00:00.354  139  is sleeping
+00:00:00.354  140  has taken a fork
+00:00:00.354  103  is sleeping
+00:00:00.358  138  has taken a fork
+00:00:00.358  138  has taken a fork
+00:00:00.358  138  is eating
+00:00:00.358  137  is sleeping
+00:00:00.370  169  has taken a fork
+00:00:00.370  169  has taken a fork
+00:00:00.370  169  is eating
+00:00:00.383  171  has taken a fork
+00:00:00.383  171  has taken a fork
+00:00:00.383  171  is eating
+00:00:00.394  173  has taken a fork
+00:00:00.394  173  has taken a fork
+00:00:00.394  173  is eating
+00:00:00.401  175  [0;91mdied[0m
