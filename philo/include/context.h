@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/05 20:31:03 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/06 23:56:30 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ struct s_philo
 	short		id;
 	size_t		start;
 	size_t		last_meal;
+	int			meals;
 	t_mtx		r_fork;
 	t_mtx		*l_fork;
 	t_ctx		*ctx;
@@ -59,7 +60,6 @@ struct	s_ctx
 	size_t	die_time;
 	size_t	eat_time;
 	size_t	sleep_time;
-	size_t	think_time;
 	int		philos;
 	int		meals;
 	t_mtx	meal_lock;
