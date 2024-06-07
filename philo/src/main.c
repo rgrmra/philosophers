@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/05 21:05:51 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/06 22:07:24 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@
 static int	input_error(int argc)
 {
 	if (argc < 2)
-		ft_putendl_fd("philo: ...", STDERR_FILENO);
+		ft_putendl_fd("philo: ...\n", STDERR_FILENO);
 	else if (argc < 3)
-		ft_putendl_fd("philo: Only my soul shound by immortal!", STDERR_FILENO);
+		ft_putendl_fd("philo: Only my soul shound by immortal!\n", STDERR_FILENO);
 	else if (argc < 4)
-		ft_putendl_fd("philo: Should I starve?", STDERR_FILENO);
+		ft_putendl_fd("philo: Should I starve?\n", STDERR_FILENO);
 	else if (argc < 5)
-		ft_putendl_fd("philo: No one survives without sleep!", STDERR_FILENO);
+		ft_putendl_fd("philo: No one survives without sleep!\n", STDERR_FILENO);
 	else if (argc > 6)
-		ft_putendl_fd("philo: What is this supposed to be?", STDERR_FILENO);
+		ft_putendl_fd("philo: What is this supposed to be?\n", STDERR_FILENO);
 	else
 		return (false);
 	return (true);
@@ -61,7 +61,7 @@ int	parse_inputs(t_ctx *ctx, char **argv)
 
 size_t	current_time(void)
 {
-	struct timeval			timestamp;
+	struct timeval	timestamp;
 
 	if (gettimeofday(&timestamp, NULL) < 0)
 		ft_putendl_fd("philo: error: gettimeofday()", STDERR_FILENO);
@@ -74,16 +74,16 @@ void	print_log(t_philo *philo, char *message)
 
 	time = current_time() - philo->start;
 	pthread_mutex_lock(&philo->ctx->write_lock);
-	pthread_mutex_lock(&philo->ctx->dead_lock);
+	//pthread_mutex_lock(&philo->ctx->dead_lock);
 	if (!philo->ctx->dead)
 		printf("%02ld:%02ld:%02ld.%03ld%5d  %s\n",
 			time / 1000 / 3600 % 24,
 			time / 1000 / 60 % 60,
 			time / 1000 % 60,
-			time % 1000, 
+			time % 1000,
 			philo->id,
 			message);
-	pthread_mutex_unlock(&philo->ctx->dead_lock);
+	//pthread_mutex_unlock(&philo->ctx->dead_lock);
 	pthread_mutex_unlock(&philo->ctx->write_lock);
 }
 
@@ -94,7 +94,7 @@ void	init_philos(t_ctx *ctx)
 	pthread_mutex_init(&ctx->write_lock, NULL);
 	pthread_mutex_init(&ctx->dead_lock, NULL);
 	pthread_mutex_init(&ctx->meal_lock, NULL);
-	ctx->dead = 0;
+	ctx->dead = false;
 	ctx->think_time = ctx->die_time - ctx->eat_time - ctx->sleep_time;
 	i = 0;
 	while (i < ctx->philos)
@@ -125,45 +125,100 @@ void destroy_all(t_ctx *ctx, char *message)
 	pthread_mutex_destroy(&ctx->dead_lock);
 }
 
-void	*monitoring(void *philos)
-{
-	return (philos);
-}
-
-void	*routine(void *philo)
-{
-	return (philo);
-}
-
-void	create_threads(t_ctx *ctx)
-{
-	pthread_t	observer;
-	int			i;
-
-	pthread_create(&observer, NULL, &monitoring, ctx->philo);
-	pthread_join(observer, NULL);
-	i = 0;
-	while (i < ctx->philos)
-	{
-		pthread_create(&ctx->philo[i].thread, NULL, &routine, &ctx->philo[i]);
-		pthread_join(ctx->philo[i].thread, NULL);
-		i++;
-	}
-}
-
 int	ft_usleep(size_t milliseconds)
 {
 	size_t	start;
 
 	start = current_time();
-	if (milliseconds >= start)
-		return (false);
+	//if (milliseconds >= start)
+	//	return (false);
 	while ((current_time() - start) < milliseconds)
 		usleep(500);
 	return (false);
 }
 
+void	eating(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+		pthread_mutex_lock(&philo->r_fork);
+	else
+		pthread_mutex_lock(philo->l_fork);
+	print_log(philo, RFORK);
+	if (philo->id % 2 == 0)
+		pthread_mutex_lock(philo->l_fork);
+	else
+	 	pthread_mutex_lock(&philo->r_fork);
+	print_log(philo, LFORK);
+	print_log(philo, EAT);
+	pthread_mutex_lock(&philo->ctx->meal_lock);
+	philo->ctx->meals--;
+	philo->last_meal = current_time();
+	pthread_mutex_unlock(&philo->ctx->meal_lock);
+	ft_usleep(philo->ctx->sleep_time);
+	pthread_mutex_unlock(&philo->r_fork);
+	pthread_mutex_unlock(philo->l_fork);
+}
 
+void	sleeping(t_philo *philo)
+{
+	print_log(philo, SLEEP);
+	ft_usleep(philo->ctx->sleep_time);
+}
+
+void	thinking(t_philo *philo)
+{
+	print_log(philo, THINK);
+}
+
+int	dead(t_philo *philo)
+{
+	_Bool	status;
+
+	status = false;
+	pthread_mutex_lock(&philo->ctx->dead_lock);
+	if (philo->ctx->dead)
+		status = true;
+	else if (current_time() - philo->last_meal > philo->ctx->die_time)
+	{
+		print_log(philo, DIED);
+		philo->ctx->dead = true;
+		status = true;
+	}
+	pthread_mutex_unlock(&philo->ctx->dead_lock);
+	return (status);
+}
+
+void	*routine(void *philo)
+{
+	t_philo	*p;
+
+	p = (t_philo *) philo;
+	while (!dead(p))
+	{
+		eating(p);
+		sleeping(p);
+		thinking(p);	
+	}
+	return (philo);
+}
+
+void	create_threads(t_ctx *ctx)
+{
+	int	i;
+
+	i = 0;
+	while (i < ctx->philos)
+	{
+		pthread_create(&ctx->philo[i].thread, NULL, &routine, &ctx->philo[i]);
+		i++;
+	}
+	i = 0;
+	while (i < ctx->philos)
+	{
+		pthread_join(ctx->philo[i].thread, NULL);
+		i++;
+	}
+}
 int	main(int argc, char **argv)
 {
 	t_ctx	ctx;
