@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/07 19:55:49 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/09 21:53:54 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,14 +163,14 @@ void	ft_usleep(t_philo *philo, size_t milliseconds)
 
 void	eating(t_philo *philo)
 {
-	//if (philo->id % 2 == 0)
-	//{
-	//	pthread_mutex_lock(&philo->r_fork);
-	//	print_log(philo, RFORK);
-	//	pthread_mutex_lock(philo->l_fork);
-	//	print_log(philo, LFORK);
-	//}
-	//else
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(&philo->r_fork);
+		print_log(philo, RFORK);
+		pthread_mutex_lock(philo->l_fork);
+		print_log(philo, LFORK);
+	}
+	else
 	{
 		pthread_mutex_lock(philo->l_fork);
 		print_log(philo, LFORK);
@@ -178,11 +178,11 @@ void	eating(t_philo *philo)
 		print_log(philo, RFORK);
 	}
 	print_log(philo, EAT);
-	philo->meals++;
 	pthread_mutex_lock(&philo->ctx->meal_lock);
+	philo->meals++;
 	philo->last_meal = current_time();
 	pthread_mutex_unlock(&philo->ctx->meal_lock);
-	ft_usleep(philo, philo->ctx->sleep_time);
+	ft_usleep(philo, philo->ctx->eat_time);
 	pthread_mutex_unlock(&philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 }
