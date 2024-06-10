@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/09 21:53:54 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/10 12:37:12 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	print_log(t_philo *philo, char *message)
 	pthread_mutex_unlock(&philo->ctx->dead_lock);
 }
 
-void	init_philos(t_ctx *ctx)
+void	init_philos(t_ctx *ctx, t_philo *philos)
 {
 	int	i;
 
@@ -102,28 +102,27 @@ void	init_philos(t_ctx *ctx)
 	i = 0;
 	while (i < ctx->philos)
 	{
-		ctx->philo[i].id = i + 1;
-		ctx->philo[i].meals = 0;
-		pthread_mutex_init(&ctx->philo[i].r_fork, NULL);
+		philos[i].id = i + 1;
+		philos[i].meals = 0;
+		pthread_mutex_init(&philos[i].r_fork, NULL);
 		if (i == ctx->philos - 1)
-			ctx->philo[i].l_fork = &ctx->philo[0].r_fork;
+			philos[i].l_fork = &philos[0].r_fork;
 		else
-		 	ctx->philo[i].l_fork = &ctx->philo[i + 1].r_fork;
-		ctx->philo[i].ctx = ctx;
-		ctx->philo[i].start = current_time();
-		ctx->philo[i].last_meal = current_time();
+		 	philos[i].l_fork = &philos[i + 1].r_fork;
+		philos[i].ctx = ctx;
+		philos[i].start = current_time();
+		philos[i].last_meal = current_time();
 		i++;
 	}
 }
 
-void destroy_all(t_ctx *ctx, char *message)
+void destroy_all(t_ctx *ctx, t_philo *philos)
 {
 	int	i;
 
 	i = 0;
-	ft_putendl_fd(message, STDERR_FILENO);
 	while (i < ctx->philos)
-		pthread_mutex_destroy(&ctx->philo[i++].r_fork);
+		pthread_mutex_destroy(&philos[i++].r_fork);
 	pthread_mutex_destroy(&ctx->write_lock);
 	pthread_mutex_destroy(&ctx->meal_lock);
 	pthread_mutex_destroy(&ctx->dead_lock);
@@ -132,15 +131,11 @@ void destroy_all(t_ctx *ctx, char *message)
 _Bool dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->ctx->dead_lock);
-	if (philo->ctx->dead)
+	if (philo->ctx->dead || current_time() - philo->last_meal > philo->ctx->die_time)
 	{
 		pthread_mutex_unlock(&philo->ctx->dead_lock);
-		return (true);
-	}
-	else if (current_time() - philo->last_meal > philo->ctx->die_time)
-	{
-		pthread_mutex_unlock(&philo->ctx->dead_lock);
-		print_log(philo, DIED);
+		if (!philo->ctx->dead)
+			print_log(philo, DIED);
 		return (true);
 	}
 	pthread_mutex_unlock(&philo->ctx->dead_lock);
@@ -240,32 +235,31 @@ void	*routine(void *philo)
 	t_philo	*p;
 
 	p = (t_philo *) philo;
-	while (!dead(p) && !starve(p))
-	{
-		eating(p);
-		sleeping(p);
-		thinking(p);
-	}
-	return (philo);
+	if (dead(p) || starve(p))
+		return (philo);
+	eating(p);
+	sleeping(p);
+	thinking(p);
+	return (routine(philo));
 }
 
-void	create_threads(t_ctx *ctx)
+void	create_threads(t_philo *philos)
 {
 	//pthread_t	observer;
 	int	i;
 
 	//pthread_create(&observer, NULL, monitoring, ctx->philo);
 	i = 0;
-	while (i < ctx->philos)
+	while (i < philos->ctx->philos)
 	{
-		pthread_create(&ctx->philo[i].thread, NULL, routine, &ctx->philo[i]);
+		pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
 		i++;
 	}
 	//pthread_join(observer, NULL);
 	i = 0;
-	while (i < ctx->philos)
+	while (i < philos->ctx->philos)
 	{
-		pthread_join(ctx->philo[i].thread, NULL);
+		pthread_join(philos[i].thread, NULL);
 		i++;
 	}
 }
@@ -283,9 +277,8 @@ int	main(int argc, char **argv)
 		printf("Bad format input!\n");
 		return (EXIT_FAILURE);
 	}
-	ctx.philo = philo;
-	init_philos(&ctx);
-	create_threads(&ctx);
-	destroy_all(&ctx, "");
+	init_philos(&ctx, philo);
+	create_threads(philo);
+	destroy_all(&ctx, philo);
 	return (EXIT_SUCCESS);
 }

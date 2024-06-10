@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/06 23:56:30 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/10 12:22:49 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ struct s_philo
 
 struct	s_ctx
 {
-	t_philo	*philo;
 	_Bool	dead;
 	size_t	die_time;
 	size_t	eat_time;
