@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/10 12:22:49 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/12 21:33:58 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 typedef struct s_ctx	t_ctx;
 typedef struct s_philo	t_philo;
 typedef pthread_mutex_t	t_mtx;
+typedef void	(*hand_t)(t_philo *philo);
 
 struct s_philo
 {
@@ -48,6 +49,7 @@ struct s_philo
 	size_t		start;
 	size_t		last_meal;
 	int			meals;
+	hand_t		hand;
 	t_mtx		r_fork;
 	t_mtx		*l_fork;
 	t_ctx		*ctx;
@@ -55,6 +57,7 @@ struct s_philo
 
 struct	s_ctx
 {
+	pthread_t	supervisor;
 	_Bool	dead;
 	size_t	die_time;
 	size_t	eat_time;
