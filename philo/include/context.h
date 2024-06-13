@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/12 21:33:58 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/12 22:11:22 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ struct s_philo
 	size_t		last_meal;
 	int			meals;
 	hand_t		hand;
+	_Bool		dead;
 	t_mtx		r_fork;
 	t_mtx		*l_fork;
 	t_ctx		*ctx;
