@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/12 22:11:22 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/14 14:11:00 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,9 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <sys/time.h>
 
 # define PHILOSOPHERS 200
-
-# define RED "\033[0;91m"
-# define GREEN "\033[0;92m"
-# define YELLOW "\033[0;93m"
-# define BLUE "\033[0;94m"
-# define MAGENTA "\033[0;95m"
-# define CYAN "\033[0;96m"
-# define WHITE "\033[0;97m"
-# define RESET "\033[0m"
-
 
 # define EAT "is eating"
 # define SLEEP "is sleeping"
@@ -40,18 +31,17 @@
 typedef struct s_ctx	t_ctx;
 typedef struct s_philo	t_philo;
 typedef pthread_mutex_t	t_mtx;
-typedef void	(*hand_t)(t_philo *philo);
 
 struct s_philo
 {
 	pthread_t	thread;
 	short		id;
-	size_t		start;
-	size_t		last_meal;
+	suseconds_t	start;
+	suseconds_t	last_meal;
 	int			meals;
-	hand_t		hand;
+	t_mtx		meal_lock;
 	_Bool		dead;
-	t_mtx		r_fork;
+	t_mtx		*r_fork;
 	t_mtx		*l_fork;
 	t_ctx		*ctx;
 };
@@ -59,15 +49,14 @@ struct s_philo
 struct	s_ctx
 {
 	pthread_t	supervisor;
-	_Bool	dead;
-	size_t	die_time;
-	size_t	eat_time;
-	size_t	sleep_time;
-	int		philos;
-	int		meals;
-	t_mtx	meal_lock;
-	t_mtx	dead_lock;
-	t_mtx	write_lock;
+	_Bool		dead;
+	suseconds_t	die_time;
+	suseconds_t	eat_time;
+	suseconds_t	sleep_time;
+	int			philos;
+	int			meals;
+	t_mtx		dead_lock;
+	t_mtx		write_lock;
 };
 
 long	ft_atol(char *pntr);

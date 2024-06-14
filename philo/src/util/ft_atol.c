@@ -6,14 +6,16 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 18:03:55 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/05 20:37:29 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/14 12:11:17 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
-long	ft_atol(const char *nptr)
+#include <sys/time.h>
+
+suseconds_t	ft_atol(const char *nptr)
 {
-	char	sign;
-	long	nb;
+	char		sign;
+	suseconds_t	nb;
 
 	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
 		nptr++;
@@ -26,6 +28,6 @@ long	ft_atol(const char *nptr)
 	if (sign == '-')
 		nb = -nb;
 	if (*nptr)
-		return (0);
+		return (-1);
 	return (nb);
 }
