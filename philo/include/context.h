@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/14 14:11:00 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/14 17:47:46 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ struct	s_ctx
 {
 	pthread_t	supervisor;
 	_Bool		dead;
-	suseconds_t	die_time;
-	suseconds_t	eat_time;
-	suseconds_t	sleep_time;
+	suseconds_t	die;
+	suseconds_t	eat;
+	suseconds_t	sleep;
 	int			philos;
 	int			meals;
 	t_mtx		dead_lock;
