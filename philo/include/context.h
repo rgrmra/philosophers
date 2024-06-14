@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/14 17:47:46 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/14 19:11:02 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,17 @@ struct	s_ctx
 	t_mtx		write_lock;
 };
 
-long	ft_atol(char *pntr);
-void	ft_putendl_fd(char *str, int fd);
+long		ft_atol(char *pntr);
+void		ft_putendl_fd(char *str, int fd);
+void		ft_usleep(suseconds_t milliseconds);
+suseconds_t	current_time(void);
+void		print_log(t_philo *philo, char *message);
+void		eating(t_philo *philo);
+void		sleeping(t_philo *philo);
+void		thinking(t_philo *philo);
+void		*monitoring(void *philos);
+void		*routine(void *philos);
+void		init_philos(t_ctx *ctx, t_philo *philos, t_mtx *forks);
+void		destroy_all(t_ctx *ctx, t_philo *philos);
 
 #endif

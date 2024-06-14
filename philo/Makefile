@@ -6,7 +6,7 @@
 #    By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/23 19:48:08 by rde-mour          #+#    #+#              #
-#    Updated: 2024/06/12 21:58:17 by rde-mour         ###   ########.org.br    #
+#    Updated: 2024/06/14 19:11:40 by rde-mour         ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,9 @@ RESET				= $(shell tput sgr0)
 NAME				= philo
 
 FILES				= main.c \
+					  checkers.c \
+					  tasks.c \
+					  utils.c \
 					  util/ft_atol.c \
 					  util/ft_putendl_fd.c
 
