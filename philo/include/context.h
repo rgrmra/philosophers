@@ -6,18 +6,20 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/14 19:11:02 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/15 12:39:08 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTEXT_H
 # define CONTEXT_H
 
-# include <pthread.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/time.h>
+# include <sys/types.h>
+
+//# include <pthread.h>
+//# include <stdbool.h>
+//# include <stdio.h>
+//# include <unistd.h>
+//# include <sys/time.h>
 
 # define PHILOSOPHERS 200
 

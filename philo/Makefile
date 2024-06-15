@@ -6,7 +6,7 @@
 #    By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/23 19:48:08 by rde-mour          #+#    #+#              #
-#    Updated: 2024/06/14 19:11:40 by rde-mour         ###   ########.org.br    #
+#    Updated: 2024/06/15 14:36:15 by rde-mour         ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,18 @@ RESET				= $(shell tput sgr0)
 NAME				= philo
 
 FILES				= main.c \
-					  checkers.c \
-					  tasks.c \
-					  utils.c \
+					  checker/monitouring.c \
+					  checker/routine.c \
+					  init/destory_all.c \
+					  init/init_philos.c \
+					  routine/eating.c \
+					  routine/sleeping.c \
+					  routine/thinking.c \
+					  util/current_time.c \
 					  util/ft_atol.c \
-					  util/ft_putendl_fd.c
+					  util/ft_putendl_fd.c \
+					  util/ft_usleep.c \
+					  util/print_log.c
 
 SRCDIR				= ./src
 OBJDIR				= ./obj
@@ -35,8 +42,7 @@ OBJS				= $(FILES:%.c=$(OBJDIR)/%.o)
 INCLUDES			:= -I ./include
 
 COMPILER			= cc
-CFLAGS				= -Wall -Wextra -Werror -pthread -O3 -g3 
-#-fsanitize=thread
+CFLAGS				= -Wall -Wextra -Werror -lpthread -O3
 
 all: 				$(NAME)
 

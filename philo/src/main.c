@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/14 19:14:50 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/15 13:03:52 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/time.h>
 
 static int	input_error(int argc)
 {
@@ -43,7 +42,7 @@ static int	input_error(int argc)
 	return (true);
 }
 
-int	parse_inputs(t_ctx *ctx, char **argv)
+static int	parse_inputs(t_ctx *ctx, char **argv)
 {
 	ctx->philos = ft_atol(argv[1]);
 	if (ctx->philos < 1 || ctx->philos > PHILOSOPHERS)
@@ -68,7 +67,7 @@ int	parse_inputs(t_ctx *ctx, char **argv)
 	return (true);
 }
 
-void	create_threads(t_philo *philos)
+static void	create_threads(t_philo *philos)
 {
 	int	i;
 
@@ -99,7 +98,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!parse_inputs(&ctx, argv))
 	{
-		printf("Bad format input!\n");
+		ft_putendl_fd("Bad format input!\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	init_philos(&ctx, philo, fork);

@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tasks.c                                            :+:      :+:    :+:   */
+/*   eating.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 18:12:51 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/14 18:16:02 by rde-mour         ###   ########.org.br   */
+/*   Created: 2024/06/15 12:59:12 by rde-mour          #+#    #+#             */
+/*   Updated: 2024/06/15 13:00:17 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "context.h"
+#include <pthread.h>
+#include <unistd.h>
 
-void	right(t_philo *philo)
+static void	right(t_philo *philo)
 {
 	while (pthread_mutex_lock(philo->r_fork))
 		usleep(250);
@@ -21,7 +23,7 @@ void	right(t_philo *philo)
 	print_log(philo, LFORK);
 }
 
-void	left(t_philo *philo)
+static void	left(t_philo *philo)
 {
 	while (pthread_mutex_lock(philo->l_fork))
 		usleep(250);
@@ -50,16 +52,4 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->meal_lock);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
-}
-
-void	sleeping(t_philo *philo)
-{
-	print_log(philo, SLEEP);
-	ft_usleep(philo->ctx->sleep);
-}
-
-void	thinking(t_philo *philo)
-{
-	print_log(philo, THINK);
-	ft_usleep((philo->ctx->die - philo->ctx->eat - philo->ctx->sleep) / 5);
 }
