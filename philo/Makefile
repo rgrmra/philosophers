@@ -6,7 +6,7 @@
 #    By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/23 19:48:08 by rde-mour          #+#    #+#              #
-#    Updated: 2024/06/15 14:36:15 by rde-mour         ###   ########.org.br    #
+#    Updated: 2024/06/15 17:31:41 by rde-mour         ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ RESET				= $(shell tput sgr0)
 NAME				= philo
 
 FILES				= main.c \
-					  checker/monitouring.c \
+					  checker/monitoring.c \
 					  checker/routine.c \
-					  init/destory_all.c \
+					  init/destroy_all.c \
 					  init/init_philos.c \
 					  routine/eating.c \
 					  routine/sleeping.c \
@@ -42,7 +42,7 @@ OBJS				= $(FILES:%.c=$(OBJDIR)/%.o)
 INCLUDES			:= -I ./include
 
 COMPILER			= cc
-CFLAGS				= -Wall -Wextra -Werror -lpthread -O3
+CFLAGS				= -Wall -Wextra -Werror -pthread -O3
 
 all: 				$(NAME)
 
