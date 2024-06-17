@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:51:22 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/16 22:54:37 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/17 17:56:08 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_log(t_philo *philo, char *message)
 
 	sem_wait(philo->ctx->write_lock);
 	time = current_time() - philo->ctx->start;
-	printf("%16ld%5d  %s\n", time, philo->id, message);
+	printf("%ld%5d  %s\n", time, philo->id, message);
 	if (*message != *DIED)
 		sem_post(philo->ctx->write_lock);
 }

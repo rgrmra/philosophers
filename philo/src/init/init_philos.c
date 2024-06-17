@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:55:40 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/15 12:56:42 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/17 18:46:34 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	init_philos(t_ctx *ctx, t_philo *philos, t_mtx *forks)
 		else
 			philos[i].l_fork = &forks[i + 1];
 		philos[i].ctx = ctx;
-		philos[i].start = current_time();
-		philos[i].last_meal = current_time();
+		ctx->start = current_time();
+		philos[i].last_meal = ctx->start;
 		i++;
 	}
 }

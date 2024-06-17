@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/15 13:03:52 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/17 19:34:03 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,14 @@ static void	create_threads(t_philo *philos)
 	while (i < philos->ctx->philos)
 	{
 		pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
-		i++;
+		i += 2;
+	}
+	usleep(250);
+	i = 1;
+	while (i < philos->ctx->philos)
+	{
+		pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
+		i += 2;
 	}
 	pthread_join(philos->ctx->supervisor, NULL);
 	i = 0;

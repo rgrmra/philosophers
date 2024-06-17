@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:53:23 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/15 12:54:30 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/16 19:25:18 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	ft_usleep(suseconds_t milliseconds)
 
 	start = current_time();
 	while (current_time() - start < milliseconds)
-		usleep(500);
+		usleep(250);
 }

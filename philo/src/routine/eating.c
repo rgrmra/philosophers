@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:59:12 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/15 13:00:17 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/17 19:56:28 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 static void	right(t_philo *philo)
 {
-	while (pthread_mutex_lock(philo->r_fork))
-		usleep(250);
+	pthread_mutex_lock(philo->r_fork);
 	print_log(philo, RFORK);
 	pthread_mutex_lock(philo->l_fork);
 	print_log(philo, LFORK);
@@ -25,8 +24,7 @@ static void	right(t_philo *philo)
 
 static void	left(t_philo *philo)
 {
-	while (pthread_mutex_lock(philo->l_fork))
-		usleep(250);
+	pthread_mutex_lock(philo->l_fork);
 	print_log(philo, LFORK);
 	pthread_mutex_lock(philo->r_fork);
 	print_log(philo, RFORK);
@@ -48,8 +46,8 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->last_meal = current_time();
 	philo->meals++;
-	ft_usleep(philo->ctx->eat);
 	pthread_mutex_unlock(&philo->meal_lock);
+	ft_usleep(philo->ctx->eat);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 }

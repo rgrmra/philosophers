@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:42:44 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/15 12:43:58 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/17 19:57:09 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 static _Bool	check_dead(t_philo *philo, int *meals)
 {
 	pthread_mutex_lock(&philo->meal_lock);
-	if (philo->meals != philo->ctx->meals
-		&& current_time() - philo->last_meal > philo->ctx->die)
+	if (current_time() - philo->last_meal > philo->ctx->die)
 	{
 		pthread_mutex_unlock(&philo->meal_lock);
 		print_log(philo, DIED);

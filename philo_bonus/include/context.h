@@ -6,14 +6,13 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/16 22:55:19 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/17 19:58:06 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTEXT_H
 # define CONTEXT_H
 
-#include <sys/select.h>
 # include <sys/types.h>
 # include <semaphore.h>
 
