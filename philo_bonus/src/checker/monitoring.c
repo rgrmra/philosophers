@@ -6,21 +6,20 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:42:44 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/15 22:45:51 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/16 21:38:02 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "context.h"
 #include <semaphore.h>
-#include <signal.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 static _Bool	check_dead(t_philo *philo, int *meals)
 {
 	sem_wait(philo->meal_lock);
-	if (philo->meals != philo->ctx->meals
-		&& current_time() - philo->last_meal > philo->ctx->die)
+	if (current_time() - philo->last_meal > philo->ctx->die)
 	{
 		sem_post(philo->meal_lock);
 		print_log(philo, DIED);
@@ -32,27 +31,23 @@ static _Bool	check_dead(t_philo *philo, int *meals)
 	return (false);
 }
 
-void	*monitoring(t_philo *philos)
+void	*monitoring(void *philos)
 {
-	t_philo	*p;
-	int		i;
-	int		meals;
+	t_philo		*p;
+	t_garbage	*g;
+	int			meals;
 
-	p = (t_philo *) philos;
-	i = 0;
+	g = (t_garbage *) philos;
+	p = (t_philo *) g->philo;
 	meals = 0;
-	while (i < p->ctx->philos)
+	if (check_dead(p, &meals))
 	{
-		if (check_dead(&p[i++], &meals))
-		{
-		i = 0;
-		while (i < p->ctx->philos)
-			kill(p[i++].pid, SIGKILL);
+		destroy_all(p->ctx, g->philos);
+		exit(EXIT_FAILURE);
 		return (philos);
-		}
 	}
-	if (meals == p->ctx->philos * p->ctx->meals)
+	if (meals == p->ctx->meals)
 		return (philos);
-	usleep(1000);
+	usleep(500);
 	return (monitoring(philos));
 }

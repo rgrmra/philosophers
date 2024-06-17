@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:44:31 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/15 22:46:10 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/16 21:21:21 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static _Bool	starve(t_philo *philo)
 	return (status);
 }
 
-void	*routine(t_philo *philo)
+void	*routine(void *philo)
 {
 	t_philo	*p;
 

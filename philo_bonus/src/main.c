@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/15 23:06:44 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/16 21:36:14 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,55 +69,47 @@ static int	parse_inputs(t_ctx *ctx, char **argv)
 	return (true);
 }
 
-#include <stdio.h>
-int	teste(t_philo *philo)
+static void	wait_all(t_philo *philos)
 {
 	int	i;
-	t_philo	*p;
+	int	status;
 
-	p = philo;
-	i = 0;
-	while (i < 10)
-	{
-		printf("%d "EAT"\n", p->id);
-		ft_usleep(p, p->ctx->eat);
-		printf("%d "SLEEP"\n", p->id);
-		ft_usleep(p, p->ctx->sleep);
-		printf("%d "THINK"\n", p->id);
-		i++;
-	}
-	return (0);
-}
-
-static void	create_threads(t_ctx *ctx, t_philo *philos)
-{
-	int	i;
-	int status;
-
-	i = 0;
-	status = 0;
-	while (i < philos->ctx->philos)
-	{
-		philos[i].pid = fork();
-		if (philos[i].pid == 0)
-		{
-			routine(&philos[i]);
-			destroy_all(ctx, philos);
-			exit(EXIT_SUCCESS);
-		}
-		i++;
-	}
 	i = 0;
 	while (i < philos->ctx->philos)
 	{
-		waitpid(-1, &status, 0);
-		if (WEXITSTATUS(status) == 1)
+		waitpid(-1, &status, WUNTRACED);
+		if (WEXITSTATUS(status) > EXIT_SUCCESS)
 			break ;
 		i++;
 	}
 	i = 0;
 	while (i < philos->ctx->philos)
 		kill(philos[i++].pid, SIGKILL);
+}
+
+static void	init_forks(t_philo *philos)
+{
+	int			i;
+	t_garbage	garbage;
+
+	i = 0;
+	while (i < philos->ctx->philos)
+	{
+		philos[i].pid = fork();
+		if (philos[i].pid == 0)
+		{
+			garbage.philos = philos;
+			garbage.philo = &philos[i];
+			pthread_create(&philos[i].supervisor, NULL, monitoring, &garbage);
+			pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
+			pthread_join(philos[i].supervisor, NULL);
+			pthread_join(philos[i].thread, NULL);
+			destroy_all(philos->ctx, philos);
+			exit(EXIT_SUCCESS);
+		}
+		i++;
+	}
+	wait_all(philos);
 }
 
 int	main(int argc, char **argv)
@@ -135,7 +127,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	init_philos(&ctx, philo, fork);
-	create_threads(&ctx, philo);
+	init_forks(philo);
 	destroy_all(&ctx, philo);
 	return (EXIT_SUCCESS);
 }
