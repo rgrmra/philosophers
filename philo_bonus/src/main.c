@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/16 21:36:14 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/16 22:00:29 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,21 +90,23 @@ static void	wait_all(t_philo *philos)
 static void	init_forks(t_philo *philos)
 {
 	int			i;
+	t_philo		*p;
 	t_garbage	garbage;
 
 	i = 0;
-	while (i < philos->ctx->philos)
+	p = philos;
+	while (i < p->ctx->philos)
 	{
-		philos[i].pid = fork();
-		if (philos[i].pid == 0)
+		p[i].pid = fork();
+		if (p[i].pid == 0)
 		{
-			garbage.philos = philos;
-			garbage.philo = &philos[i];
-			pthread_create(&philos[i].supervisor, NULL, monitoring, &garbage);
-			pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
-			pthread_join(philos[i].supervisor, NULL);
-			pthread_join(philos[i].thread, NULL);
-			destroy_all(philos->ctx, philos);
+			garbage.philos = p;
+			garbage.philo = &p[i];
+			pthread_create(&p->ctx->supervisor, NULL, monitoring, &garbage);
+			pthread_create(&p[i].thread, NULL, routine, &p[i]);
+			pthread_join(p->ctx->supervisor, NULL);
+			pthread_join(p[i].thread, NULL);
+			destroy_all(p->ctx, philos);
 			exit(EXIT_SUCCESS);
 		}
 		i++;
@@ -116,7 +118,6 @@ int	main(int argc, char **argv)
 {
 	static t_ctx	ctx;
 	static t_philo	philo[PHILOSOPHERS];
-	static sem_t	fork[PHILOSOPHERS];
 
 	ctx = (t_ctx){0};
 	if (input_error(argc))
@@ -126,7 +127,7 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("Bad format input!\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	init_philos(&ctx, philo, fork);
+	init_philos(&ctx, philo);
 	init_forks(philo);
 	destroy_all(&ctx, philo);
 	return (EXIT_SUCCESS);

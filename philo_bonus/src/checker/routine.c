@@ -6,25 +6,13 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:44:31 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/16 21:21:21 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/16 22:54:15 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "context.h"
 #include <semaphore.h>
 #include <stdbool.h>
-
-static _Bool	dead(t_philo *philo)
-{
-	_Bool	status;
-
-	status = false;
-	sem_wait(philo->ctx->dead_lock);
-	if (philo->ctx->dead)
-		status = true;
-	sem_post(philo->ctx->dead_lock);
-	return (status);
-}
 
 static _Bool	starve(t_philo *philo)
 {
@@ -46,7 +34,7 @@ void	*routine(void *philo)
 	eating(p);
 	sleeping(p);
 	thinking(p);
-	if (starve(p) || dead(p))
+	if (starve(p))
 		return (philo);
 	return (routine(philo));
 }
