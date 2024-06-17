@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:55:40 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/16 22:53:55 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/16 22:59:15 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	init_philos(t_ctx *ctx, t_philo *philos)
 		sem_unlink(philos[i].sem_meal);
 		philos[i].meal_lock = sem_excl(philos[i].sem_meal, 1);
 		philos[i].ctx = ctx;
-		ctx->start = current_time();
-		philos[i].last_meal = ctx->start;
 		i++;
 	}
 }
