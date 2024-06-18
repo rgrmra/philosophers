@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/17 18:34:47 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/17 21:09:24 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ struct	s_ctx
 	suseconds_t	die;
 	suseconds_t	eat;
 	suseconds_t	sleep;
-	suseconds_t	start;
+	suseconds_t	epoch;
 	int			philos;
 	int			meals;
 	t_mtx		dead_lock;

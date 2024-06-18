@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:42:44 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/17 19:57:09 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/17 22:11:51 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ void	*monitoring(void *philos)
 			return (philos);
 	if (meals == p->ctx->philos * p->ctx->meals)
 		return (philos);
-	usleep(1000);
 	return (monitoring(philos));
 }
