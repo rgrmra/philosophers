@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_usleep.c                                        :+:      :+:    :+:   */
+/*   current_time_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/15 12:53:23 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/16 21:26:20 by rde-mour         ###   ########.org.br   */
+/*   Created: 2024/06/15 12:49:11 by rde-mour          #+#    #+#             */
+/*   Updated: 2024/06/15 12:50:17 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "context.h"
-#include <unistd.h>
 #include <sys/time.h>
+#include <unistd.h>
 
-void	ft_usleep(suseconds_t milliseconds)
+suseconds_t	current_time(void)
 {
-	suseconds_t	start;
+	struct timeval	timestamp;
 
-	start = current_time();
-	while (current_time() - start < milliseconds)
-		usleep(500);
+	gettimeofday(&timestamp, NULL);
+	return (timestamp.tv_sec * 1000 + timestamp.tv_usec / 1000);
 }

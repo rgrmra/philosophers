@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_philos.c                                      :+:      :+:    :+:   */
+/*   init_philos_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:55:40 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/16 22:59:15 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/18 17:59:31 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "context.h"
+#include "context_bonus.h"
 #include <fcntl.h>
 #include <pthread.h>
 #include <semaphore.h>

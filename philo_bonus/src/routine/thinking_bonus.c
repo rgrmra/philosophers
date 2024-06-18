@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   thinking_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 18:12:04 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/07 00:01:44 by rde-mour         ###   ########.org.br   */
+/*   Created: 2024/06/15 13:01:55 by rde-mour          #+#    #+#             */
+/*   Updated: 2024/06/18 18:06:43 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "context_bonus.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	thinking(t_philo *philo)
 {
-	char	*p;
-
-	if (!s || !*s)
-		return ;
-	p = s;
-	while (*p)
-		p++;
-	(void) !write(fd, s, p - s);
+	print_log(philo, THINK);
+	ft_usleep((philo->ctx->die - philo->ctx->eat - philo->ctx->sleep) - 100);
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/16 23:00:07 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/18 17:58:03 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "context.h"
+#include "context_bonus.h"
 #include <pthread.h>
 #include <signal.h>
 #include <stdbool.h>
@@ -95,7 +95,7 @@ static void	init_forks(t_philo *philos)
 
 	i = 0;
 	p = philos;
-	philos->ctx->start = current_time();
+	philos->ctx->epoch = current_time();
 	while (i < p->ctx->philos)
 	{
 		p[i].pid = fork();
@@ -103,7 +103,7 @@ static void	init_forks(t_philo *philos)
 		{
 			garbage.philos = p;
 			garbage.philo = &p[i];
-			p[i].last_meal = philos->ctx->start;
+			p[i].last_meal = philos->ctx->epoch;
 			pthread_create(&p->ctx->supervisor, NULL, monitoring, &garbage);
 			pthread_create(&p[i].thread, NULL, routine, &p[i]);
 			pthread_join(p->ctx->supervisor, NULL);

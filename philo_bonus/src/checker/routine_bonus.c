@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_log.c                                        :+:      :+:    :+:   */
+/*   routine_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/15 12:51:22 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/17 17:56:08 by rde-mour         ###   ########.org.br   */
+/*   Created: 2024/06/15 12:44:31 by rde-mour          #+#    #+#             */
+/*   Updated: 2024/06/18 17:59:45 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "context.h"
+#include "context_bonus.h"
 #include <semaphore.h>
-#include <stdio.h>
-#include <sys/time.h>
+#include <stdbool.h>
 
-void	print_log(t_philo *philo, char *message)
+static _Bool	starve(t_philo *philo)
 {
-	suseconds_t	time;
+	_Bool	status;
 
-	sem_wait(philo->ctx->write_lock);
-	time = current_time() - philo->ctx->start;
-	printf("%ld%5d  %s\n", time, philo->id, message);
-	if (*message != *DIED)
-		sem_post(philo->ctx->write_lock);
+	status = false;
+	sem_wait(philo->meal_lock);
+	if (philo->ctx->meals == philo->meals)
+		status = true;
+	sem_post(philo->meal_lock);
+	return (status);
+}
+
+void	*routine(void *philo)
+{
+	t_philo	*p;
+
+	p = (t_philo *) philo;
+	eating(p);
+	sleeping(p);
+	thinking(p);
+	if (starve(p))
+		return (philo);
+	return (routine(philo));
 }

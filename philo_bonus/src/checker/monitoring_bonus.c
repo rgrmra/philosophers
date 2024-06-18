@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitoring.c                                       :+:      :+:    :+:   */
+/*   monitoring_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:42:44 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/16 21:38:02 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/18 17:59:39 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "context.h"
+#include "context_bonus.h"
 #include <semaphore.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -48,6 +48,6 @@ void	*monitoring(void *philos)
 	}
 	if (meals == p->ctx->meals)
 		return (philos);
-	usleep(500);
+	usleep(1000);
 	return (monitoring(philos));
 }

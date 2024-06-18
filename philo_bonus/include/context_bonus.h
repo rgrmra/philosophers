@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   context.h                                          :+:      :+:    :+:   */
+/*   context_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/17 19:58:06 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/18 17:57:42 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTEXT_H
-# define CONTEXT_H
+#ifndef CONTEXT_BONUS_H
+# define CONTEXT_BONUS_H
 
 # include <sys/types.h>
 # include <semaphore.h>
@@ -51,7 +51,7 @@ struct	s_ctx
 	suseconds_t	die;
 	suseconds_t	eat;
 	suseconds_t	sleep;
-	suseconds_t	start;
+	suseconds_t	epoch;
 	int			philos;
 	int			meals;
 	sem_t		*forks;

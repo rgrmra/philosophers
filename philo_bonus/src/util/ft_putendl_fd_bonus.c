@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   ft_putendl_fd_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 18:03:55 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/14 12:11:17 by rde-mour         ###   ########.org.br   */
+/*   Created: 2024/05/28 18:12:04 by rde-mour          #+#    #+#             */
+/*   Updated: 2024/06/07 00:01:44 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/time.h>
+#include <unistd.h>
 
-suseconds_t	ft_atol(const char *nptr)
+void	ft_putendl_fd(char *s, int fd)
 {
-	char		sign;
-	suseconds_t	nb;
+	char	*p;
 
-	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
-		nptr++;
-	sign = 0;
-	if (*nptr == '+' || *nptr == '-')
-		sign = *nptr++;
-	nb = 0;
-	while (*nptr >= '0' && *nptr <= '9')
-		nb = (nb * 10) + *nptr++ - 48;
-	if (sign == '-')
-		nb = -nb;
-	if (*nptr)
-		return (-1);
-	return (nb);
+	if (!s || !*s)
+		return ;
+	p = s;
+	while (*p)
+		p++;
+	(void) !write(fd, s, p - s);
 }

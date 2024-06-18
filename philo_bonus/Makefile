@@ -6,7 +6,7 @@
 #    By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/23 19:48:08 by rde-mour          #+#    #+#              #
-#    Updated: 2024/06/17 18:32:03 by rde-mour         ###   ########.org.br    #
+#    Updated: 2024/06/18 18:13:29 by rde-mour         ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,20 +19,20 @@ RESET				= $(shell tput sgr0)
 
 NAME				= philo_bonus
 
-FILES				= main.c \
-					  checker/monitoring.c \
-					  checker/routine.c \
-					  init/destroy_all.c \
-					  init/init_philos.c \
-					  routine/eating.c \
-					  routine/sleeping.c \
-					  routine/thinking.c \
-					  util/current_time.c \
-					  util/ft_atol.c \
-					  util/ft_itoa.c \
-					  util/ft_putendl_fd.c \
-					  util/ft_usleep.c \
-					  util/print_log.c
+FILES				= main_bonus.c \
+					  checker/monitoring_bonus.c \
+					  checker/routine_bonus.c \
+					  init/destroy_all_bonus.c \
+					  init/init_philos_bonus.c \
+					  routine/eating_bonus.c \
+					  routine/sleeping_bonus.c \
+					  routine/thinking_bonus.c \
+					  util/current_time_bonus.c \
+					  util/ft_atol_bonus.c \
+					  util/ft_itoa_bonus.c \
+					  util/ft_putendl_fd_bonus.c \
+					  util/ft_usleep_bonus.c \
+					  util/print_log_bonus.c
 
 SRCDIR				= ./src
 OBJDIR				= ./obj
@@ -43,7 +43,7 @@ OBJS				= $(FILES:%.c=$(OBJDIR)/%.o)
 INCLUDES			:= -I ./include
 
 COMPILER			= cc
-CFLAGS				= -Wall -Wextra -Werror -pthread
+CFLAGS				= -Wall -Wextra -Werror -pthread -O3
 
 all: 				$(NAME)
 
@@ -51,7 +51,7 @@ $(NAME): 			$(LIBS) $(OBJS)
 					@$(COMPILER) $(CFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)
 					@echo "$(BLUE)Compiled $(NAME) successfully$(RESET)"
 
-$(OBJDIR)/%.o: 	$(SRCDIR)/%.c
+$(OBJDIR)/%.o: 		$(SRCDIR)/%.c
 					@mkdir -p $(dir $@)
 					@$(COMPILER) $(CFLAGS) -c $< $(INCLUDES) -o $@
 					@echo "$(GREEN)Compiled$(RESET) $(notdir $<)"
