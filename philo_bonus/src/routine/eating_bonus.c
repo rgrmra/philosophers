@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:59:12 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/18 17:59:03 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/19 19:47:54 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	eating(t_philo *philo)
 	print_log(philo, RFORK);
 	sem_wait(philo->ctx->forks);
 	print_log(philo, LFORK);
+	sem_post(philo->ctx->forks_lock);
 	print_log(philo, EAT);
 	sem_wait(philo->meal_lock);
 	philo->last_meal = current_time();
@@ -37,5 +38,4 @@ void	eating(t_philo *philo)
 	ft_usleep(philo->ctx->eat);
 	sem_post(philo->ctx->forks);
 	sem_post(philo->ctx->forks);
-	sem_post(philo->ctx->forks_lock);
 }

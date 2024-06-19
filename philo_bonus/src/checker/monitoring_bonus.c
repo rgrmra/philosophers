@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:42:44 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/18 17:59:39 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/19 19:48:39 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,21 @@ void	*monitoring(void *philos)
 	t_philo		*p;
 	t_garbage	*g;
 	int			meals;
+	int			i;
 
 	g = (t_garbage *) philos;
 	p = (t_philo *) g->philo;
 	meals = 0;
 	if (check_dead(p, &meals))
 	{
-		destroy_all(p->ctx, g->philos);
+		i = 0;
+		while (i < p->ctx->philos)
+			free(g->philos[i++].sem_meal);
 		exit(EXIT_FAILURE);
 		return (philos);
 	}
 	if (meals == p->ctx->meals)
 		return (philos);
-	usleep(1000);
+	usleep(500);
 	return (monitoring(philos));
 }

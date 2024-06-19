@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/18 17:57:42 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/19 19:51:07 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_garbage	t_garbage;
 
 struct s_philo
 {
-	pthread_t	thread;
 	pid_t		pid;
 	short		id;
 	suseconds_t	last_meal;

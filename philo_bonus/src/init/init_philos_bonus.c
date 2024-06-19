@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:55:40 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/18 17:59:31 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/19 19:21:16 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ sem_t	*sem_excl(char *name, unsigned int value)
 	sem_t	*new;
 
 	sem_unlink(name);
-	new = sem_open(name, O_CREAT | O_EXCL, 0644, value);
+	new = sem_open(name, O_CREAT | O_EXCL, 0777, value);
 	if (!new)
 		exit(EXIT_FAILURE);
 	return (new);

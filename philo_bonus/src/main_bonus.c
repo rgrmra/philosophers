@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/18 17:58:03 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/19 19:51:00 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,13 @@ static void	wait_all(t_philo *philos)
 		kill(philos[i++].pid, SIGKILL);
 }
 
-static void	init_forks(t_philo *philos)
+static void	init_forks(t_philo *p)
 {
 	int			i;
-	t_philo		*p;
 	t_garbage	garbage;
 
 	i = 0;
-	p = philos;
-	philos->ctx->epoch = current_time();
+	p->ctx->epoch = current_time();
 	while (i < p->ctx->philos)
 	{
 		p[i].pid = fork();
@@ -103,17 +101,18 @@ static void	init_forks(t_philo *philos)
 		{
 			garbage.philos = p;
 			garbage.philo = &p[i];
-			p[i].last_meal = philos->ctx->epoch;
+			p[i].last_meal = p->ctx->epoch;
 			pthread_create(&p->ctx->supervisor, NULL, monitoring, &garbage);
-			pthread_create(&p[i].thread, NULL, routine, &p[i]);
-			pthread_join(p->ctx->supervisor, NULL);
-			pthread_join(p[i].thread, NULL);
-			destroy_all(p->ctx, philos);
+			pthread_detach(p->ctx->supervisor);
+			routine(&p[i]);
+			i = 0;
+			while (i < p->ctx->philos)
+				free(p[i++].sem_meal);
 			exit(EXIT_SUCCESS);
 		}
 		i++;
 	}
-	wait_all(philos);
+	wait_all(p);
 }
 
 int	main(int argc, char **argv)
@@ -132,5 +131,8 @@ int	main(int argc, char **argv)
 	init_philos(&ctx, philo);
 	init_forks(philo);
 	destroy_all(&ctx, philo);
+	sem_unlink(WRITE_LOCK);
+	sem_unlink(FORKS);
+	sem_unlink(FORKS_LOCK);
 	return (EXIT_SUCCESS);
 }
