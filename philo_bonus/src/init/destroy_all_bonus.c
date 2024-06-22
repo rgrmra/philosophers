@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:57:08 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/19 19:22:38 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/22 18:54:12 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	destroy_all(t_ctx *ctx, t_philo *philos)
 	i = 0;
 	while (i < ctx->philos)
 	{
-		sem_close(philos[i].meal_lock);
+		sem_close(philos[i].philo_lock);
 		sem_unlink(philos[i].sem_meal);
 		free(philos[i++].sem_meal);
 	}

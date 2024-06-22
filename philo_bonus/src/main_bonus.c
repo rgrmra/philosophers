@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:52:46 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/19 19:51:00 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/22 18:23:50 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,13 @@ static void	init_forks(t_philo *p)
 			garbage.philos = p;
 			garbage.philo = &p[i];
 			p[i].last_meal = p->ctx->epoch;
+			pthread_create(&p[i].thread, NULL, routine, &p[i]);
 			pthread_create(&p->ctx->supervisor, NULL, monitoring, &garbage);
-			pthread_detach(p->ctx->supervisor);
-			routine(&p[i]);
-			i = 0;
-			while (i < p->ctx->philos)
-				free(p[i++].sem_meal);
+			pthread_join(p[i].thread, NULL);
+			pthread_join(p->ctx->supervisor, (void *) &garbage);
+			destroy_all(p->ctx, p);
+			if (garbage.philo->ctx->dead)
+				exit(EXIT_FAILURE);
 			exit(EXIT_SUCCESS);
 		}
 		i++;

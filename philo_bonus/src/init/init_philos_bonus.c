@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 12:55:40 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/19 19:21:16 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/22 18:54:19 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_philos(t_ctx *ctx, t_philo *philos)
 	ctx->write_lock = sem_excl(WRITE_LOCK, 1);
 	ctx->forks_lock = sem_excl(FORKS_LOCK, ctx->philos / 2);
 	ctx->forks = sem_excl(FORKS, ctx->philos);
+	ctx->dead = false;
 	i = 0;
 	while (i < ctx->philos)
 	{
@@ -44,7 +45,7 @@ void	init_philos(t_ctx *ctx, t_philo *philos)
 		philos[i].meals = 0;
 		philos[i].sem_meal = ft_itoa(i);
 		sem_unlink(philos[i].sem_meal);
-		philos[i].meal_lock = sem_excl(philos[i].sem_meal, 1);
+		philos[i].philo_lock = sem_excl(philos[i].sem_meal, 1);
 		philos[i].ctx = ctx;
 		i++;
 	}

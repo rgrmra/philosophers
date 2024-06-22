@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:34:24 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/06/19 19:51:07 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/22 18:52:29 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ typedef struct s_garbage	t_garbage;
 
 struct s_philo
 {
+	pthread_t	thread;
 	pid_t		pid;
 	short		id;
 	suseconds_t	last_meal;
 	char		*sem_meal;
 	int			meals;
-	sem_t		*meal_lock;
+	sem_t		*philo_lock;
 	t_ctx		*ctx;
 };
 
@@ -53,6 +54,7 @@ struct	s_ctx
 	suseconds_t	epoch;
 	int			philos;
 	int			meals;
+	_Bool		dead;
 	sem_t		*forks;
 	sem_t		*forks_lock;
 	sem_t		*write_lock;
