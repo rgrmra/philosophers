@@ -6,7 +6,7 @@
 #    By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/23 19:48:08 by rde-mour          #+#    #+#              #
-#    Updated: 2024/06/19 19:38:44 by rde-mour         ###   ########.org.br    #
+#    Updated: 2024/06/23 10:26:46 by rde-mour         ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ OBJS				= $(FILES:%.c=$(OBJDIR)/%.o)
 INCLUDES			:= -I ./include
 
 COMPILER			= cc
-CFLAGS				= -Wall -Wextra -Werror -pthread -g3 -O3
+CFLAGS				= -Wall -Wextra -Werror -pthread -O3
 
 all: 				$(NAME)
 
